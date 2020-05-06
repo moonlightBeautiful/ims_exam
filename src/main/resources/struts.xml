@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-    "http://struts.apache.org/dtds/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-	
-	<package name="studentInfo" namespace="/" extends="struts-default">
-		
-		
-		
-	</package>
-	
-
-     
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <package name="studentInfo" namespace="/" extends="struts-default">
+        <action name="student" class="com.ims.action.StudentAction">
+            <result name="success" type="redirect">/main.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+    </package>
 </struts>
