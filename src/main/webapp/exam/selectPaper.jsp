@@ -19,7 +19,7 @@
 <body>
 <div class="data_list">
     <div class="data_content">
-        <form action="" method="post" onsubmit="return checkForm()">
+        <form action="paper!getPaperQuestions" method="post" onsubmit="return checkForm()">
             <table width="40%" align="center">
                 <tr>
                     <td><label><strong>请选择考试试卷：</strong></label></td>

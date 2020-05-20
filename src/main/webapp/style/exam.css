@@ -1,13 +1,39 @@
-.foot{
-	text-align: center;
-	margin-top:18px;
-	margin-bottom: 18px;
+.foot {
+    text-align: center;
+    margin-top: 18px;
+    margin-bottom: 18px;
 }
 
-.defaultPage{
-	text-align:center;
-	margin-top: 120px;
-	font-size: 50px;
-	color: red;
-	height: 300px;
+.defaultPage {
+    text-align: center;
+    margin-top: 120px;
+    font-size: 50px;
+    color: red;
+    height: 300px;
+}
+
+.data_list {
+    margin-top: 10px;
+}
+
+.data_list .data_content {
+    margin-top: 15px;
+}
+
+.data_list .data_exam_content {
+    margin-top: 15px;
+    padding-left: 30px;
+}
+
+.data_list .data_info .examTitle {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.data_list .data_info .examScoreInfo {
+    padding: 10px;
+    font-weight: bold;
+    text-align: right;
 }

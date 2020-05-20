@@ -48,7 +48,7 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
     public String login() throws Exception {
         Student currentUser = studentDao.login(student);
         if (currentUser == null) {
-            error = "×¼¿¼Ö¤ºÅ»òÃÜÂë´íÎó";
+            error = "å‡†è€ƒè¯å·æˆ–å¯†ç é”™è¯¯";
             return ERROR;
         } else {
             HttpSession session = request.getSession();

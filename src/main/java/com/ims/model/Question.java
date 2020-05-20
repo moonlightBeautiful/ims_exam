@@ -14,7 +14,7 @@ public class Question {
     private int id;
     private String subject;
     /**
-     * 单选、多选
+     * 1 单选、2 多选
      */
     private String type;
     private Date joinTime;
