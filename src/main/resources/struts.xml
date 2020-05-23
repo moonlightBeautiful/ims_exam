@@ -18,5 +18,9 @@
         <action name="exam" class="com.ims.action.ExamAction">
             <result name="success">/main.jsp</result>
         </action>
+
+        <action name="manager" class="com.ims.action.ManagerAction">
+            <result name="success">/main.jsp</result>
+        </action>
     </package>
 </struts>
