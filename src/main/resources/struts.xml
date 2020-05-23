@@ -21,6 +21,8 @@
 
         <action name="manager" class="com.ims.action.ManagerAction">
             <result name="success">/main.jsp</result>
+            <result name="error">/login.jsp</result>
+            <result name="logout" type="redirect">/login.jsp</result>
         </action>
     </package>
 </struts>

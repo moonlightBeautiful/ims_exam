@@ -47,6 +47,11 @@ public class ManagerAction extends ActionSupport implements ServletRequestAware 
         }
     }
 
+    public String logout()throws Exception{
+        request.getSession().invalidate();
+        return "logout";
+    }
+
     @Override
     public void setServletRequest(HttpServletRequest request) {
         // TODO Auto-generated method stub

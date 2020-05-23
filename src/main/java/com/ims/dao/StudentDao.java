@@ -5,6 +5,8 @@ import com.ims.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.List;
+
 
 public class StudentDao {
 
@@ -33,5 +35,19 @@ public class StudentDao {
         session.merge(student);
         session.getTransaction().commit();
     }
+
+    public List<Student> getStudents() throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        StringBuffer hql = new StringBuffer("from Student");
+        Query query = session.createQuery(hql.toString());
+        @SuppressWarnings("unchecked")
+        List<Student> studentList = (List<Student>) query.list();
+
+        session.getTransaction().commit();
+        return studentList;
+    }
+
 
 }

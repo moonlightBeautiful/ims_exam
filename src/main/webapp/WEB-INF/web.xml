@@ -4,7 +4,8 @@
          id="WebApp_ID" version="2.5">
     <display-name>ims_exam</display-name>
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <!--<welcome-file>login.jsp</welcome-file>-->
+        <welcome-file>managerLogin.jsp</welcome-file>
     </welcome-file-list>
 
     <filter>

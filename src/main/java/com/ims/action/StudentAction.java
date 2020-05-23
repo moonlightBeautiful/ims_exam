@@ -9,6 +9,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import java.util.List;
+
 /**
  * @author: GaoXu
  * @date: 2020/5/24
@@ -25,6 +27,7 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
     private String mainPage;
     private Student student;
     private String error;
+    private List<Student> studentList;
 
     public String getMainPage() {
         return mainPage;
@@ -50,6 +53,13 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
         this.error = error;
     }
 
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
 
     public String login() throws Exception {
         Student currentUser = studentDao.login(student);
@@ -76,9 +86,15 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
         return SUCCESS;
     }
 
-    public String logout()throws Exception{
+    public String logout() throws Exception {
         request.getSession().invalidate();
         return "logout";
+    }
+
+    public String list() throws Exception {
+        studentList = studentDao.getStudents();
+        mainPage = "student/studentList.jsp";
+        return SUCCESS;
     }
 
     @Override
