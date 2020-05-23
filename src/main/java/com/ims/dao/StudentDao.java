@@ -18,4 +18,20 @@ public class StudentDao {
         session.getTransaction().commit();
         return resultStudent;
     }
+
+    public Student getStudentById(String id) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Student student = (Student) session.get(Student.class, id);
+        session.getTransaction().commit();
+        return student;
+    }
+
+    public void saveStudent(Student student) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.merge(student);
+        session.getTransaction().commit();
+    }
+
 }

@@ -5,7 +5,7 @@
     <ul class="nav">
       <li><a href="${pageContext.request.contextPath}/paper!list">在线考试</a></li>
       <li><a href="${pageContext.request.contextPath}/exam!getExams?exam.student.id=${currentUser.id}">成绩查询</a></li>
-      <li><a href="#">修改密码</a></li>
+      <li><a href="${pageContext.request.contextPath}/student!preUpdatePassword">修改密码</a></li>
       <li><a href="#">退出系统</a></li>
     </ul>
   </div>

@@ -7,6 +7,11 @@ import com.ims.model.Paper;
 import com.ims.model.Question;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * @author: GaoXu
+ * @date: 2020/5/24
+ * @desc：请对类进行描述
+ */
 public class PaperAction extends ActionSupport {
 
     private static final long serialVersionUID = 1L;

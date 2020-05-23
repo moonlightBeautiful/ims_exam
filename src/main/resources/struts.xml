@@ -7,7 +7,7 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <package name="studentInfo" namespace="/" extends="struts-default">
         <action name="student" class="com.ims.action.StudentAction">
-            <result name="success" type="redirect">/main.jsp</result>
+            <result name="success">/main.jsp</result>
             <result name="error">/login.jsp</result>
         </action>
 

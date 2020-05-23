@@ -9,6 +9,11 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * @author: GaoXu
+ * @date: 2020/5/24
+ * @desc：请对类进行描述
+ */
 public class StudentAction extends ActionSupport implements ServletRequestAware {
 
     private static final long serialVersionUID = 1L;
@@ -17,33 +22,34 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
 
     private StudentDao studentDao = new StudentDao();
 
+    private String mainPage;
     private Student student;
-
     private String error;
 
-    @Override
-    public void setServletRequest(HttpServletRequest request) {
-        this.request = request;
+    public String getMainPage() {
+        return mainPage;
+    }
+
+    public void setMainPage(String mainPage) {
+        this.mainPage = mainPage;
     }
 
     public Student getStudent() {
         return student;
     }
 
-
     public void setStudent(Student student) {
         this.student = student;
     }
-
 
     public String getError() {
         return error;
     }
 
-
     public void setError(String error) {
         this.error = error;
     }
+
 
     public String login() throws Exception {
         Student currentUser = studentDao.login(student);
@@ -56,4 +62,24 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
             return SUCCESS;
         }
     }
+
+    public String preUpdatePassword() throws Exception {
+        mainPage = "student/updatePassword.jsp";
+        return SUCCESS;
+    }
+
+    public String updatePassword() throws Exception {
+        Student s = studentDao.getStudentById(student.getId());
+        s.setPassword(student.getPassword());
+        studentDao.saveStudent(s);
+        mainPage = "student/updateSuccess.jsp";
+        return SUCCESS;
+    }
+
+
+    @Override
+    public void setServletRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
 }

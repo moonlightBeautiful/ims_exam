@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @description:
  * @author: GaoXu
- * @date: 2020/5/23 22:37
+ * @date: 2020/5/24
+ * @desc：请对类进行描述
  */
 public class ExamAction extends ActionSupport implements ServletRequestAware {
 
