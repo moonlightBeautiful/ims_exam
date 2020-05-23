@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,26 +27,32 @@ public class ExamAction extends ActionSupport implements ServletRequestAware {
 
     private HttpServletRequest request;
 
-    private Exam exam;
     private String mainPage;
-
-    public Exam getExam() {
-        return exam;
-    }
-
-
-    public void setExam(Exam exam) {
-        this.exam = exam;
-    }
-
+    private Exam exam;
+    private List<Exam> examList;
 
     public String getMainPage() {
         return mainPage;
     }
 
-
     public void setMainPage(String mainPage) {
         this.mainPage = mainPage;
+    }
+
+    public Exam getExam() {
+        return exam;
+    }
+
+    public void setExam(Exam exam) {
+        this.exam = exam;
+    }
+
+    public List<Exam> getExamList() {
+        return examList;
+    }
+
+    public void setExamList(List<Exam> examList) {
+        this.examList = examList;
     }
 
     public String saveExam() throws Exception {
@@ -86,6 +93,12 @@ public class ExamAction extends ActionSupport implements ServletRequestAware {
 
         examDao.saveExam(exam);
         mainPage = "exam/examResult.jsp";
+        return SUCCESS;
+    }
+
+    public String getExams() throws Exception {
+        examList = examDao.getExams(exam);
+        mainPage = "exam/myExam.jsp";
         return SUCCESS;
     }
 
