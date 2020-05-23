@@ -76,6 +76,10 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
         return SUCCESS;
     }
 
+    public String logout()throws Exception{
+        request.getSession().invalidate();
+        return "logout";
+    }
 
     @Override
     public void setServletRequest(HttpServletRequest request) {
