@@ -14,5 +14,9 @@
         <action name="paper" class="com.ims.action.PaperAction">
             <result name="success">/main.jsp</result>
         </action>
+
+        <action name="exam" class="com.ims.action.ExamAction">
+            <result name="success">/main.jsp</result>
+        </action>
     </package>
 </struts>
