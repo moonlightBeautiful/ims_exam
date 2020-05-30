@@ -11,6 +11,21 @@
     <div class="data_info">
         <p>考生信息管理</p>
     </div>
+    <div class="search_content">
+        <form action="${pageContext.request.contextPath}/student!list" method="post">
+            <table align="center">
+                <tr>
+                    <td><label>准考证号：</label></td>
+                    <td><input type="text" id="s_id" name="student.id" value="${student.id }"/></td>
+                    <td>&nbsp;</td>
+                    <td><label>姓名：</label></td>
+                    <td><input type="text" id="s_name" name="student.name" value="${student.name }"/></td>
+                    <td>&nbsp;</td>
+                    <td><button class="btn btn-primary" style="margin-bottom: 8px" type="submit">查询</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
     <div class="data_content">
         <table class="table table-bordered table-hover">
             <tr>
@@ -39,6 +54,13 @@
                 </tr>
             </c:forEach>
         </table>
+    </div>
+    <div>
+        <div class="pagination pagination-centered">
+            <ul>
+                ${pageCode }
+            </ul>
+        </div>
     </div>
 </div>
 </body>

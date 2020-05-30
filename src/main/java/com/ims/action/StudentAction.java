@@ -4,7 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.ims.dao.StudentDao;
+import com.ims.model.PageBean;
 import com.ims.model.Student;
+import com.ims.util.PageUtil;
+import freemarker.template.utility.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,6 +32,9 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
     private Student student;
     private String error;
     private List<Student> studentList;
+    private String page;
+    private int total;
+    private String pageCode;
 
     public String getMainPage() {
         return mainPage;
@@ -92,8 +99,25 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
     }
 
     public String list() throws Exception {
-        studentList = studentDao.getStudents();
-        mainPage = "student/studentList.jsp";
+        HttpSession session=request.getSession();
+        if(StringUtils.isEmpty(page)){
+            page="1";
+        }
+        if(student==null){
+            Object o=session.getAttribute("student");
+            if(o!=null){
+                student=(Student)o;
+            }else{
+                student=new Student();
+            }
+        }else{
+            session.setAttribute("student", student);
+        }
+        PageBean pageBean=new PageBean(Integer.parseInt(page),3);
+        studentList=studentDao.getStudents(student,pageBean);
+        total=studentDao.studentCount(student);
+        pageCode= PageUtil.genPagination(request.getContextPath()+"/student!list", total, Integer.parseInt(page), 3);
+        mainPage="student/studentList.jsp";
         return SUCCESS;
     }
 
