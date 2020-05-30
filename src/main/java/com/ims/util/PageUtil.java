@@ -3,29 +3,19 @@ package com.ims.util;
 public class PageUtil {
 
 
-    /**
-     * Éú³ÉÒ³Âëhtml
-     *
-     * @param targetUrl   Ò³°´Å¥ÇëÇó
-     * @param totalNum    ×Ü¼ÇÂ¼Êý
-     * @param currentPage µ±Ç°Ò³Âë
-     * @param pageSize    Ò³Ãæ¼ÇÂ¼³ß´ç
-     * @return
-     */
     public static String genPagination(String targetUrl, int totalNum, int currentPage, int pageSize) {
         int totalPage = totalNum % pageSize == 0 ? totalNum / pageSize : totalNum / pageSize + 1;
         StringBuffer pageCode = new StringBuffer();
-        //Ê×Ò³
-        pageCode.append("<li><a href='" + targetUrl + "?page=1'>Ê×Ò³</a></li>");
-        //ÉÏÒ»Ò³
+        //é¦–é¡µ
+        pageCode.append("<li><a href='" + targetUrl + "?page=1'>é¦–é¡µ</a></li>");
+        //ä¸Šä¸€é¡µ
         if (currentPage == 1) {
-            pageCode.append("<li class='disabled'><a href='#'>ÉÏÒ»Ò³</a></li>");
+            pageCode.append("<li class='disabled'><a href='#'>ä¸Šä¸€é¡µ</a></li>");
         } else {
-            pageCode.append("<li><a href='" + targetUrl + "?page=" + (currentPage - 1) + "'>ÉÏÒ»Ò³</a></li>");
+            pageCode.append("<li><a href='" + targetUrl + "?page=" + (currentPage - 1) + "'>ä¸Šä¸€é¡µ</a></li>");
         }
-        //ÖÐ¼äÒ³  5¸ö
+        //ä¸­é—´é¡µ   5ä¸ª
         for (int i = currentPage - 2; i <= currentPage + 2; i++) {
-            //ÖÐ¼äÒ³·¶Î§ µÚÒ»Ò³ºÍ×îºóÒ»Ò³Ö®¼ä£¬¿ªÇø¼ä¡£
             if (i < 1 || i > totalPage) {
                 continue;
             }
@@ -35,14 +25,14 @@ public class PageUtil {
                 pageCode.append("<li><a href='" + targetUrl + "?page=" + i + "'>" + i + "</a></li>");
             }
         }
-        //ÏÂÒ»Ò³
+        //ä¸‹ä¸€é¡µ
         if (currentPage == totalPage) {
-            pageCode.append("<li class='disabled'><a href='#'>ÏÂÒ»Ò³</a></li>");
+            pageCode.append("<li class='disabled'><a href='#'>ä¸‹ä¸€é¡µ</a></li>");
         } else {
-            pageCode.append("<li><a href='" + targetUrl + "?page=" + (currentPage + 1) + "'>ÏÂÒ»Ò³</a></li>");
+            pageCode.append("<li><a href='" + targetUrl + "?page=" + (currentPage + 1) + "'>ä¸‹ä¸€é¡µ</a></li>");
         }
-        //Î²Ò³
-        pageCode.append("<li><a href='" + targetUrl + "?page=" + totalPage + "'>Î²Ò³</a></li>");
+        //å°¾é¡µ
+        pageCode.append("<li><a href='" + targetUrl + "?page=" + totalPage + "'>å°¾é¡µ</a></li>");
         return pageCode.toString();
     }
 }

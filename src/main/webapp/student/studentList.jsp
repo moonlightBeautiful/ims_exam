@@ -25,6 +25,7 @@
                 </tr>
             </table>
         </form>
+        <button style="float: right;margin-bottom: 8px;" class="btn btn-mini btn-primary" type="button" onclick="javascript:window.location='student!preSave'">添加考生信息</button>
     </div>
     <div class="data_content">
         <table class="table table-bordered table-hover">
