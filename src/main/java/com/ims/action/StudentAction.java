@@ -3,21 +3,27 @@ package com.ims.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ims.dao.StudentDao;
 import com.ims.model.PageBean;
 import com.ims.model.Student;
 import com.ims.util.PageUtil;
+import com.ims.util.ResponseUtil;
 import freemarker.template.utility.DateUtil;
 import freemarker.template.utility.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: GaoXu
@@ -159,17 +165,32 @@ public class StudentAction extends ActionSupport implements ServletRequestAware 
     }
 
     public String preSave() throws Exception {
-        title = "添加学生信息";
+        if (StringUtils.isNotEmpty(student.getId())) {
+            student = studentDao.getStudentById(student.getId());
+            title = "修改学生信息";
+        } else {
+            title = "添加学生信息";
+        }
         mainPage = "student/studentSave.jsp";
         return SUCCESS;
     }
 
-    public String saveStudent() throws Exception {
+    public String save() throws Exception {
         if (StringUtils.isEmpty(student.getId())) {
             student.setId("SD" + DateFormatUtils.format(new Date(), "yyyyMMddhhmmss"));
         }
         studentDao.saveStudent(student);
         return "save";
+    }
+
+    public String delete() throws Exception {
+        student = studentDao.getStudentById(student.getId());
+        studentDao.studentDelete(student);
+        Map resultMap = new HashMap<String, Object>();
+        resultMap.put("success", true);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResponseUtil.write(objectMapper.writeValueAsString(resultMap), ServletActionContext.getResponse());
+        return null;
     }
 
     @Override

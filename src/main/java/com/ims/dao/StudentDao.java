@@ -71,9 +71,16 @@ public class StudentDao {
             sql.append(" and name like '%" + student.getName() + "%'");
         }
         Query query = session.createSQLQuery(sql.toString().replaceFirst("and", "where"));
-        int count=((BigInteger)query.uniqueResult()).intValue();
+        int count = ((BigInteger) query.uniqueResult()).intValue();
         session.getTransaction().commit();
         return count;
+    }
+
+    public void studentDelete(Student student) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.delete(student);
+        session.getTransaction().commit();
     }
 
 }

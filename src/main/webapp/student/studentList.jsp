@@ -5,6 +5,23 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <script type="text/javascript">
+        function studentDelete(studentId) {
+            if (confirm("确定要删除这条记录吗?")) {
+                $.post("student!delete", {'student.id': studentId},
+                    function (result) {
+                        var result = eval('(' + result + ')');
+                        if (result.success) {
+                            alert("删除成功！");
+                            window.location.href = "${pageContext.request.contextPath}/student!list";
+                        } else {
+                            alert("删除失败");
+                        }
+                    }
+                );
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="data_list">
@@ -25,7 +42,9 @@
                 </tr>
             </table>
         </form>
-        <button style="float: right;margin-bottom: 8px;" class="btn btn-mini btn-primary" type="button" onclick="javascript:window.location='student!preSave'">添加考生信息</button>
+        <button style="float: right;margin-bottom: 8px;" class="btn btn-mini btn-primary" type="button"
+                onclick="javascript:window.location='student!preSave'">添加考生信息
+        </button>
     </div>
     <div class="data_content">
         <table class="table table-bordered table-hover">
@@ -49,8 +68,8 @@
                     <td>${student.password }</td>
                     <td>${student.prefession }</td>
                     <td>
-                        <button class="btn btn-mini btn-info" type="button">修改</button>&nbsp;&nbsp;
-                        <button class="btn btn-mini btn-danger" type="button">删除</button>
+                        <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='student!preSave?student.id=${student.id}'">修改</button>&nbsp;&nbsp;
+                        <button class="btn btn-mini btn-danger" type="button" onclick="studentDelete('${student.id}')">删除</button>
                     </td>
                 </tr>
             </c:forEach>

@@ -42,41 +42,42 @@
         <p>${title }</p>
     </div>
     <div class="data_content">
-        <form action="student!saveStudent" method="post" onsubmit="return checkForm()">
+        <form action="student!save" method="post" onsubmit="return checkForm()">
+            <input type="hidden" id="id" name="student.id" value="${student.id }"/>
             <table width="80%" align="center">
                 <tr>
                     <td><label>姓名：</label></td>
-                    <td><input type="text" id="name" name="student.name"/></td>
+                    <td><input type="text" id="name" name="student.name" value="${student.name }"/></td>
                     <td>&nbsp;</td>
                     <td><label>性别：</label></td>
                     <td>
                         <select id="sex" name="student.sex">
                             <option value="">请选择性别：</option>
-                            <option value="男">男</option>
-                            <option value="女">女</option>
+                            <option value="男" ${student.sex=='男'?'selected':'' }>男</option>
+                            <option value="女" ${student.sex=='女'?'selected':'' }>女</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td><label>身份证：</label></td>
                     <td colspan="4">
-                        <input type="text" id="cardNo" name="student.cardNo" class="input-large"/>
+                        <input type="text" id="cardNo" name="student.cardNo" value="${student.cardNo }" class="input-large"/>
                     </td>
                 </tr>
                 <tr>
                     <td><label>专业：</label></td>
-                    <td><input type="text" id="prefession" name="student.prefession"/></td>
+                    <td><input type="text" id="prefession" name="student.prefession" value="${student.prefession }"/></td>
                     <td></td>
                     <td><label>密码：</label></td>
-                    <td><input type="text" id="password" name="student.password"/></td>
+                    <td><input type="text" id="password" name="student.password" value="${student.password }"/></td>
                 </tr>
                 <tr>
                     <td>
                         <button class="btn btn-primary" type="submit">保存</button>
                     </td>
                     <td colspan="4">
-                        <button class="btn btn-primary" type="button" onclick="javascript:history.back()">返回</button>
-                        &nbsp;&nbsp;<span id="error" color="red">${error }</span>
+                        <button class="btn btn-primary" type="button" onclick="javascript:history.back()">返回</button>&nbsp;&nbsp;
+                        <span id="error" color="red">${error }</span>
                     </td>
                 </tr>
             </table>
