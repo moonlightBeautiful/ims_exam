@@ -4,9 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>学生登陆界面</title>
-    <link href="${pageContext.request.contextPath}/style/studentInfo.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"/>
     <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
     <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript">

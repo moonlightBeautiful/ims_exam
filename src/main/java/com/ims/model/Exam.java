@@ -11,6 +11,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * @author GX
+ */
 @Entity
 @Table(name = "t_exam")
 public class Exam {
