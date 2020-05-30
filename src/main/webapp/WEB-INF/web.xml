@@ -7,7 +7,7 @@
         <!--<welcome-file>login.jsp</welcome-file>-->
         <welcome-file>managerLogin.jsp</welcome-file>
     </welcome-file-list>
-
+    <!-- struts2配置 -->
     <filter>
         <filter-name>StrutsPrepareAndExecuteFilter</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

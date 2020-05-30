@@ -25,6 +25,7 @@
         <!-- 自动表更新 -->
         <property name="hbm2ddl.auto">update</property>
 
+
         <mapping class="com.ims.model.Manager"/>
         <mapping class="com.ims.model.Paper"/>
         <mapping class="com.ims.model.Question"/>
