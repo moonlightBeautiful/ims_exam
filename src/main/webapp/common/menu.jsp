@@ -20,7 +20,7 @@
             <c:choose>
                 <c:when test="${currentUser.flag==1 }">
                     <li><a href="${pageContext.request.contextPath}/student!list">考生信息管理</a></li>
-                    <li><a href="#">考生成绩查询</a></li>
+                    <li><a href="${pageContext.request.contextPath}/exam!list">考生成绩查询</a></li>
                     <li><a href="#">试卷管理</a></li>
                     <li><a href="#">题目管理</a></li>
                     <li><a href="javascript:logout2()">退出系统</a></li>

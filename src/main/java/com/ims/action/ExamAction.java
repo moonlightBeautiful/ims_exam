@@ -3,11 +3,16 @@ package com.ims.action;
 import com.ims.dao.ExamDao;
 import com.ims.dao.QuestionDao;
 import com.ims.model.Exam;
+import com.ims.model.PageBean;
 import com.ims.model.Question;
+import com.ims.util.PageUtil;
 import com.opensymphony.xwork2.ActionSupport;
+import freemarker.template.utility.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -30,6 +35,9 @@ public class ExamAction extends ActionSupport implements ServletRequestAware {
     private String mainPage;
     private Exam exam;
     private List<Exam> examList;
+    private String page;
+    private int total;
+    private String pageCode;
 
     public String getMainPage() {
         return mainPage;
@@ -53,6 +61,30 @@ public class ExamAction extends ActionSupport implements ServletRequestAware {
 
     public void setExamList(List<Exam> examList) {
         this.examList = examList;
+    }
+
+    public String getPage() {
+        return page;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public String getPageCode() {
+        return pageCode;
+    }
+
+    public void setPageCode(String pageCode) {
+        this.pageCode = pageCode;
     }
 
     public String saveExam() throws Exception {
@@ -97,11 +129,33 @@ public class ExamAction extends ActionSupport implements ServletRequestAware {
     }
 
     public String getExams() throws Exception {
-        examList = examDao.getExams(exam);
+        examList = examDao.getExams(exam,null);
         mainPage = "exam/myExam.jsp";
         return SUCCESS;
     }
 
+    public String list() throws Exception {
+        HttpSession session = request.getSession();
+        if (StringUtils.isEmpty(page)) {
+            page = "1";
+        }
+        if (exam == null) {
+            Object o = session.getAttribute("exam");
+            if (o != null) {
+                exam = (Exam) o;
+            } else {
+                exam = new Exam();
+            }
+        } else {
+            session.setAttribute("exam", exam);
+        }
+        PageBean pageBean = new PageBean(Integer.parseInt(page), 3);
+        examList = examDao.getExams(exam, pageBean);
+        total = examDao.examCount(exam);
+        pageCode = PageUtil.genPagination(request.getContextPath() + "/exam!list", total, Integer.parseInt(page), 3);
+        mainPage = "exam/examList.jsp";
+        return SUCCESS;
+    }
 
     private int calScore(String questionId, String userAnswer, String type) throws Exception {
         Question question = questionDao.getQuestionById(questionId);

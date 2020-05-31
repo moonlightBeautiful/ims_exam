@@ -1,10 +1,11 @@
 package com.ims.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "t_student")
@@ -16,7 +17,7 @@ public class Student {
     private String sex;
     private String prefession;
     private String cardNo;
-
+    private List<Exam> examList = new ArrayList<Exam>();
     private String flag = "2";
 
     @Id
@@ -83,5 +84,13 @@ public class Student {
         this.flag = flag;
     }
 
+    @OneToMany(mappedBy = "student")
+    @Cascade(CascadeType.DELETE)
+    public List<Exam> getExamList() {
+        return examList;
+    }
 
+    public void setExamList(List<Exam> examList) {
+        this.examList = examList;
+    }
 }
