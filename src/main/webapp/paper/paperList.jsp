@@ -30,7 +30,7 @@
         <p>试卷管理</p>
     </div>
     <div class="search_content">
-        <button style="float: right;margin-bottom: 8px;" class="btn btn-mini btn-primary" type="button" onclick="javascript:window.location='student!preSave'">添加试卷</button>
+        <button style="float: right;margin-bottom: 8px;" class="btn btn-mini btn-primary" type="button" onclick="javascript:window.location='paper!preSave'">添加试卷</button>
     </div>
     <div class="data_content">
         <table class="table table-bordered table-hover">
@@ -46,7 +46,7 @@
                     <td>${paper.paperName }</td>
                     <td><fmt:formatDate value="${paper.joinDate }" type="date" pattern="yyyy-MM-dd"/></td>
                     <td>
-                        <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='student!preSave?id=${student.id}'">修改</button>&nbsp;&nbsp;
+                        <button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location='paper!preSave?paperId=${paper.id}'">修改</button>&nbsp;&nbsp;
                         <button class="btn btn-mini btn-danger" type="button" onclick="paperDelete('${paper.id}')">删除</button>
                     </td>
                 </tr>

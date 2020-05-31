@@ -9,6 +9,8 @@ import com.ims.model.Paper;
 import com.ims.model.Question;
 import com.ims.util.ResponseUtil;
 import com.opensymphony.xwork2.ActionSupport;
+import freemarker.template.utility.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 /**
@@ -21,7 +23,7 @@ public class PaperAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
 
     private PaperDao paperDao = new PaperDao();
-    private QuestionDao questionDao=new QuestionDao();
+    private QuestionDao questionDao = new QuestionDao();
     /**
      * 主要内容页
      */
@@ -47,6 +49,7 @@ public class PaperAction extends ActionSupport {
      * 多选
      */
     private List<Question> multipleQuestionList = new ArrayList<Question>();
+    private String title;
 
     public String getMainPage() {
         return mainPage;
@@ -96,6 +99,14 @@ public class PaperAction extends ActionSupport {
         this.multipleQuestionList = multipleQuestionList;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String paperSelect() {
         paperList = paperDao.getPapers();
         mainPage = "exam/selectPaper.jsp";
@@ -108,12 +119,12 @@ public class PaperAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String delete()throws Exception{
-        paper=paperDao.getPaper(paperId);
+    public String delete() throws Exception {
+        paper = paperDao.getPaper(paperId);
         Map resultMap = new HashMap<String, Object>();
-        if(questionDao.existQuestionByPaperId(paperId)){
+        if (questionDao.existQuestionByPaperId(paperId)) {
             resultMap.put("error", "试卷下面有题目，不能删除");
-        }else{
+        } else {
             paperDao.delete(paper);
             resultMap.put("success", true);
         }
@@ -158,4 +169,24 @@ public class PaperAction extends ActionSupport {
         return resultList;
     }
 
+    public String preSave() throws Exception {
+        if (StringUtils.isNotEmpty(paperId)) {
+            paper = paperDao.getPaper(paperId);
+            title = "修改试卷";
+        } else {
+            title = "添加试卷";
+        }
+        mainPage = "paper/paperSave.jsp";
+        return SUCCESS;
+    }
+
+    public String save() throws Exception {
+        if (StringUtils.isNotEmpty(paperId)) {
+            paper.setId(Integer.parseInt(paperId));
+        } else {
+            paper.setJoinDate(new Date());
+        }
+        paperDao.save(paper);
+        return "save";
+    }
 }

@@ -14,6 +14,7 @@
 
         <action name="paper" class="com.ims.action.PaperAction">
             <result name="success">/main.jsp</result>
+            <result name="save" type="redirectAction">paper!paperList</result>
         </action>
 
         <action name="exam" class="com.ims.action.ExamAction">
