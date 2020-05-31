@@ -26,4 +26,11 @@ public class PaperDao {
         session.getTransaction().commit();
         return paper;
     }
+
+    public void delete(Paper paper) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.delete(paper);
+        session.getTransaction().commit();
+    }
 }

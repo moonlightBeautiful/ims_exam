@@ -2,10 +2,14 @@ package com.ims.action;
 
 import java.util.*;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ims.dao.PaperDao;
+import com.ims.dao.QuestionDao;
 import com.ims.model.Paper;
 import com.ims.model.Question;
+import com.ims.util.ResponseUtil;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 
 /**
  * @author: GaoXu
@@ -17,6 +21,7 @@ public class PaperAction extends ActionSupport {
     private static final long serialVersionUID = 1L;
 
     private PaperDao paperDao = new PaperDao();
+    private QuestionDao questionDao=new QuestionDao();
     /**
      * 主要内容页
      */
@@ -91,10 +96,30 @@ public class PaperAction extends ActionSupport {
         this.multipleQuestionList = multipleQuestionList;
     }
 
-    public String list() {
+    public String paperSelect() {
         paperList = paperDao.getPapers();
         mainPage = "exam/selectPaper.jsp";
         return SUCCESS;
+    }
+
+    public String paperList() throws Exception {
+        paperList = paperDao.getPapers();
+        mainPage = "paper/paperList.jsp";
+        return SUCCESS;
+    }
+
+    public String delete()throws Exception{
+        paper=paperDao.getPaper(paperId);
+        Map resultMap = new HashMap<String, Object>();
+        if(questionDao.existQuestionByPaperId(paperId)){
+            resultMap.put("error", "试卷下面有题目，不能删除");
+        }else{
+            paperDao.delete(paper);
+            resultMap.put("success", true);
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResponseUtil.write(objectMapper.writeValueAsString(resultMap), ServletActionContext.getResponse());
+        return null;
     }
 
     public String getPaperQuestions() throws Exception {

@@ -39,7 +39,7 @@ public class ManagerAction extends ActionSupport implements ServletRequestAware 
         HttpSession session = request.getSession();
         Manager currentUser = managerDao.login(manager);
         if (currentUser == null) {
-            error = "用户名或密码错误";
+            error = "鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒";
             return ERROR;
         } else {
             session.setAttribute("currentUser", currentUser);

@@ -21,12 +21,12 @@
                 <c:when test="${currentUser.flag==1 }">
                     <li><a href="${pageContext.request.contextPath}/student!list">考生信息管理</a></li>
                     <li><a href="${pageContext.request.contextPath}/exam!list">考生成绩查询</a></li>
-                    <li><a href="#">试卷管理</a></li>
+                    <li><a href="${pageContext.request.contextPath}/paper!paperList">试卷管理</a></li>
                     <li><a href="#">题目管理</a></li>
                     <li><a href="javascript:logout2()">退出系统</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="${pageContext.request.contextPath}/paper!list">在线考试</a></li>
+                    <li><a href="${pageContext.request.contextPath}/paper!paperSelect">在线考试</a></li>
                     <li><a href="${pageContext.request.contextPath}/exam!getExams?s_exam.student.id=${currentUser.id}">成绩查询</a></li>
                     <li><a href="${pageContext.request.contextPath}/student!preUpdatePassword">修改密码</a></li>
                     <li><a href="javascript:logout()">退出系统</a></li>
