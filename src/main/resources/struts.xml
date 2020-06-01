@@ -21,6 +21,10 @@
             <result name="success">/main.jsp</result>
         </action>
 
+        <action name="question" class="com.ims.action.QuestionAction">
+            <result name="success">/main.jsp</result>
+        </action>
+
         <action name="manager" class="com.ims.action.ManagerAction">
             <result name="success">/main.jsp</result>
             <result name="error">/login.jsp</result>
