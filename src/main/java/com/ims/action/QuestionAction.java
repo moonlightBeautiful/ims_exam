@@ -1,18 +1,23 @@
 package com.ims.action;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ims.dao.QuestionDao;
 import com.ims.model.PageBean;
 import com.ims.model.Question;
 import com.ims.util.PageUtil;
+import com.ims.util.ResponseUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import freemarker.template.utility.StringUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuestionAction extends ActionSupport implements ServletRequestAware {
 
@@ -31,7 +36,7 @@ public class QuestionAction extends ActionSupport implements ServletRequestAware
     private String page;
     private int total;
     private String pageCode;
-
+    private String questionId;
 
     public List<Question> getQuestionList() {
         return questionList;
@@ -92,6 +97,17 @@ public class QuestionAction extends ActionSupport implements ServletRequestAware
         this.pageCode = pageCode;
     }
 
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
 
     @Override
     public void setServletRequest(HttpServletRequest request) {
@@ -120,5 +136,21 @@ public class QuestionAction extends ActionSupport implements ServletRequestAware
         pageCode = PageUtil.genPagination(request.getContextPath() + "/question!list", total, Integer.parseInt(page), 3);
         mainPage = "question/questionList.jsp";
         return SUCCESS;
+    }
+
+    public String getQuestionById() throws Exception {
+        question = questionDao.getQuestionById(questionId);
+        mainPage = "question/questionShow.jsp";
+        return SUCCESS;
+    }
+
+    public String delete() throws Exception {
+        question = questionDao.getQuestionById(questionId);
+        questionDao.delete(question);
+        Map resultMap = new HashMap<String, Object>();
+        resultMap.put("success", true);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ResponseUtil.write(objectMapper.writeValueAsString(resultMap), ServletActionContext.getResponse());
+        return null;
     }
 }

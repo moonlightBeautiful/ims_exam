@@ -49,34 +49,41 @@ public class QuestionDao {
         }
     }
 
-    public List<Question> getQuestions(Question s_question, PageBean pageBean)throws Exception{
-        Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+    public List<Question> getQuestions(Question s_question, PageBean pageBean) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        StringBuffer hql=new StringBuffer("from Question");
-        if(StringUtils.isNotEmpty(s_question.getSubject())){
-            hql.append(" and subject like '%"+s_question.getSubject()+"%'");
+        StringBuffer hql = new StringBuffer("from Question");
+        if (StringUtils.isNotEmpty(s_question.getSubject())) {
+            hql.append(" and subject like '%" + s_question.getSubject() + "%'");
         }
-        Query query=session.createQuery(hql.toString().replaceFirst("and", "where"));
-        if(pageBean!=null){
+        Query query = session.createQuery(hql.toString().replaceFirst("and", "where"));
+        if (pageBean != null) {
             query.setFirstResult(pageBean.getStart());
             query.setMaxResults(pageBean.getPageSize());
         }
         @SuppressWarnings("unchecked")
-        List<Question> questionList=(List<Question>)query.list();
+        List<Question> questionList = (List<Question>) query.list();
         session.getTransaction().commit();
         return questionList;
     }
 
-    public int questionCount(Question s_question)throws Exception{
-        Session session=HibernateUtil.getSessionFactory().getCurrentSession();
+    public int questionCount(Question s_question) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        StringBuffer sql=new StringBuffer("select count(*) from t_question");
-        if(StringUtils.isNotEmpty(s_question.getSubject())){
-            sql.append(" and subject like '%"+s_question.getSubject()+"%'");
+        StringBuffer sql = new StringBuffer("select count(*) from t_question");
+        if (StringUtils.isNotEmpty(s_question.getSubject())) {
+            sql.append(" and subject like '%" + s_question.getSubject() + "%'");
         }
-        Query query=session.createSQLQuery(sql.toString().replaceFirst("and", "where"));
-        int count=((BigInteger)query.uniqueResult()).intValue();
+        Query query = session.createSQLQuery(sql.toString().replaceFirst("and", "where"));
+        int count = ((BigInteger) query.uniqueResult()).intValue();
         session.getTransaction().commit();
         return count;
+    }
+
+    public void delete(Question question) throws Exception {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        session.delete(question);
+        session.getTransaction().commit();
     }
 }
