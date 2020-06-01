@@ -2,8 +2,10 @@ package com.ims.action;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ims.dao.PaperDao;
 import com.ims.dao.QuestionDao;
 import com.ims.model.PageBean;
+import com.ims.model.Paper;
 import com.ims.model.Question;
 import com.ims.util.PageUtil;
 import com.ims.util.ResponseUtil;
@@ -24,24 +26,31 @@ public class QuestionAction extends ActionSupport implements ServletRequestAware
     private static final long serialVersionUID = 1L;
 
     private HttpServletRequest request;
-
     private QuestionDao questionDao = new QuestionDao();
-
-    private List<Question> questionList;
+    private PaperDao paperDao = new PaperDao();
 
     private String mainPage;
-
+    private List<Question> questionList;
     private Question question;
-
     private String page;
     private int total;
     private String pageCode;
     private String questionId;
+    private List<Paper> paperList;
 
     public List<Question> getQuestionList() {
         return questionList;
     }
 
+    private String title;
+
+    public List<Paper> getPaperList() {
+        return paperList;
+    }
+
+    public void setPaperList(List<Paper> paperList) {
+        this.paperList = paperList;
+    }
 
     public void setQuestionList(List<Question> questionList) {
         this.questionList = questionList;
@@ -109,6 +118,14 @@ public class QuestionAction extends ActionSupport implements ServletRequestAware
         return question;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public void setServletRequest(HttpServletRequest request) {
         // TODO Auto-generated method stub
@@ -153,4 +170,25 @@ public class QuestionAction extends ActionSupport implements ServletRequestAware
         ResponseUtil.write(objectMapper.writeValueAsString(resultMap), ServletActionContext.getResponse());
         return null;
     }
+
+    public String preSave() throws Exception {
+        paperList = paperDao.getPapers();
+        if (StringUtils.isNotEmpty(questionId)) {
+            question = questionDao.getQuestionById(questionId);
+            title = "修改试卷信息";
+        } else {
+            title = "添加试卷信息";
+        }
+        mainPage = "question/questionSave.jsp";
+        return SUCCESS;
+    }
+
+    public String save() throws Exception {
+        if (StringUtils.isNotEmpty(questionId)) {
+            question.setId(Integer.parseInt(questionId));
+        }
+        questionDao.save(question);
+        return "save";
+    }
+
 }
