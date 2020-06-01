@@ -34,11 +34,9 @@
             <table align="center">
                 <tr>
                     <td><label>考试题目：</label></td>
-                    <td><input type="text" id="s_subject" name="s_question.subject" value="${s_question.subject }"/></td>
+                    <td><input type="text" id="s_subject" name="question.subject" value="${question.subject }"/></td>
                     <td>&nbsp;</td>
-                    <td>
-                        <button class="btn btn-primary" style="margin-bottom: 8px" type="submit">查询</button>
-                    </td>
+                    <td><button class="btn btn-primary" style="margin-bottom: 8px" type="submit">查询</button></td>
                 </tr>
             </table>
         </form>

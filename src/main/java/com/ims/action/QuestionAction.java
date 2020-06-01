@@ -137,16 +137,6 @@ public class QuestionAction extends ActionSupport implements ServletRequestAware
         if (StringUtils.isEmpty(page)) {
             page = "1";
         }
-        if (question == null) {
-            Object o = session.getAttribute("s_question");
-            if (o != null) {
-                question = (Question) o;
-            } else {
-                question = new Question();
-            }
-        } else {
-            session.setAttribute("s_question", question);
-        }
         PageBean pageBean = new PageBean(Integer.parseInt(page), 3);
         questionList = questionDao.getQuestions(question, pageBean);
         total = questionDao.questionCount(question);

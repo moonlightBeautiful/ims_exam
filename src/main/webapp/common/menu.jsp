@@ -22,7 +22,7 @@
                     <li><a href="${pageContext.request.contextPath}/student!list">考生信息管理</a></li>
                     <li><a href="${pageContext.request.contextPath}/exam!list">考生成绩查询</a></li>
                     <li><a href="${pageContext.request.contextPath}/paper!paperList">试卷管理</a></li>
-                    <li><a href="${pageContext.request.contextPath}/question!list">题目管理</a></li>
+                    <li><a href="${pageContext.request.contextPath}/question!list?question.subject">题目管理</a></li>
                     <li><a href="javascript:logout2()">退出系统</a></li>
                 </c:when>
                 <c:otherwise>

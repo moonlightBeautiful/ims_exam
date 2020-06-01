@@ -23,6 +23,7 @@
 
         <action name="question" class="com.ims.action.QuestionAction">
             <result name="success">/main.jsp</result>
+            <result name="save" type="redirectAction">question!list</result>
         </action>
 
         <action name="manager" class="com.ims.action.ManagerAction">
